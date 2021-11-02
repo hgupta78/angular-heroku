@@ -23,6 +23,12 @@ export class DashboardComponent implements OnInit {
   public pieChartPlugins = [];
   totalCount = 0;
   totalCountPresent = 0;
+  nationalTotalCount = 0;
+  stateTotalCount= 0;
+  
+  nationalTotalPresentCount = 0;
+  stateTotalPresentCount= 0;
+  
   dataList = [];
   attendanceInquriy: any;
   constructor(private attendancerecorderService: AttendancerecorderService) {
@@ -37,6 +43,7 @@ export class DashboardComponent implements OnInit {
     this.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
       this.attendanceInquriy = response;
       this.totalCount = response.total;
+      this.processResponseTotalCount(this);
       this.processResponse(this);
     })
     this.getAttendanceInquriyInterval();
@@ -53,17 +60,35 @@ export class DashboardComponent implements OnInit {
     }, 10000);
 
   }
+processResponseTotalCount(vm) {
+   vm.nationalTotalCount = 0;
+  vm.stateTotalCount = 0
+    vm.attendanceInquriy.totalList.forEach(element => {
+      if (element) {
+        if (element.name.toLowerCase() == 'national') {
+          vm.nationalTotalCount = element.count;
+        } else {
+          vm.stateTotalCount += element.count;
+        }
 
+      }
+    });
+  }
   processResponse(vm) {
     vm.pieChartLabels = [];
     vm.pieChartData = []
     vm.totalCountPresent = 0;
+    vm.nationalTotalPresentCount = 0;
+  vm.stateTotalPresentCount= 0;
+    
     vm.attendanceInquriy.list.forEach(element => {
       if (element) {
-        if (element.name == null) {
+        if (element.name.toLowerCase() == 'national') {
           vm.pieChartLabels.push('Internal');
+          vm.nationalTotalPresentCount = element.count;
         } else {
           vm.pieChartLabels.push(element.name);
+           vm.stateTotalPresentCount += element.count;
         }
 
         vm.pieChartData.push(element.count);
