@@ -54,7 +54,7 @@
                   <div class="relative mt-10 bg-white border-2 border-grey-500 z-10 rounded-2xl grid grid-cols-3 divide-x-2 divide-grey-500 py-2">
                     <div class="mx-4 p-4 pl-0 mr-0 pr-0 md:pl-4">
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">{{totalCount}}</h1>
+                          <h1 class="text-4xl">{{nationalTotalCount}}</h1>
                       </div>
                       <div class="count-title font-normal">
                           <h3 class="text-2xl">Expected</h3>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">75</h1>
+                          <h1 class="text-4xl">{{nationalTotalPresentCount}}</h1>
                       </div>
                       <div class="count-title font-normal">
                           <h3 class="text-2xl">Present</h3>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">25</h1>
+                          <h1 class="text-4xl">{{nationalTotalCount - nationalTotalPresentCount}}</h1>
                       </div>
                       <div class="count-title font-normal">
                           <h3 class="text-2xl">Absent</h3>
@@ -87,7 +87,7 @@
                   <div class="relative mt-10 bg-white border-2 border-grey-500 z-10 rounded-2xl grid grid-cols-4 divide-x-2 divide-grey-500 py-2">
                     <div class="mx-4 p-4 pl-0 mr-0 pr-0 md:pl-4">
                         <div class="count font-semibold" style="color: #F49420;">
-                            <h1 class="text-4xl">37</h1>
+                            <h1 class="text-4xl">{{attendanceInquriy?.totalList?.length -1}}</h1>
                         </div>
                         <div class="count-title font-normal">
                             <h3 class="text-2xl">States</h3>
@@ -95,7 +95,7 @@
                       </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">150</h1>
+                          <h1 class="text-4xl">{{stateTotalCount}}</h1>
                       </div>
                       <div class="count-title font-normal">
                           <h3 class="text-2xl">Expected</h3>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">125</h1>
+                          <h1 class="text-4xl">{{stateTotalPresentCount}}</h1>
                       </div>
                       <div class="count-title font-normal">
                           <h3 class="text-2xl">Present</h3>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
                         <div class="count font-semibold" style="color: #F49420;">
-                            <h1 class="text-4xl">25</h1>
+                            <h1 class="text-4xl">{{stateTotalCount-stateTotalPresentCount}}</h1>
                         </div>
                         <div class="count-title font-normal">
                             <h3 class="text-2xl">Absent</h3>
