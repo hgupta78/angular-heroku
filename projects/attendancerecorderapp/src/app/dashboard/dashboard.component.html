@@ -405,3 +405,34 @@
   
    
 </div>
+
+        // Accordian funtionality
+        var stateDetailExpandTriggers = document.querySelectorAll('.state-detail-expand-trigger');
+        for (var i = 0; i < stateDetailExpandTriggers.length; i++) {
+            stateDetailExpandTriggers[i].addEventListener('click', function() {
+                let parent_li = this.parentElement.parentElement.parentElement
+                let table = parent_li.children.length ? parent_li.children[1] : false // 2nd child (i.e. on index 1) is table
+
+                if(table){
+                    if(table.classList.contains("hidden")){
+                        table.classList.remove("hidden")
+                        // table.classList.replace("hidden", "block")
+                    }else{
+                        table.classList.add("hidden")
+                        // table.classList.replace("block", "hidden")
+                    }
+                    if(this.classList.contains('rotate-0')){
+                        this.classList.replace('rotate-0', 'rotate-180')
+                        parent_li.classList.add("bg-gray-200")
+                    }else{
+                        this.classList.replace('rotate-180', 'rotate-0')
+                        parent_li.classList.remove("bg-gray-200")
+                    }
+                }else{
+                    // alert("No state specific details as of now!")
+                }
+            });
+        }
+
+    </script>
+
