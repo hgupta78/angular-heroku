@@ -2,7 +2,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigurationsetupService } from 'projects/ecoomerecelib/src/public-api';
+import { ConfigurationsetupService } from 'projects/attendancerecorderapp/src/public-api';
 import { forkJoin } from 'rxjs';
 
 @Injectable({
