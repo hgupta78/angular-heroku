@@ -126,37 +126,6 @@
         }
       }
     },
-    "ecoomerecelib": {
-      "projectType": "library",
-      "root": "projects/ecoomerecelib",
-      "sourceRoot": "projects/ecoomerecelib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/ecoomerecelib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ecoomerecelib/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ecoomerecelib/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ecoomerecelib/src/test.ts",
-            "tsConfig": "projects/ecoomerecelib/tsconfig.spec.json",
-            "karmaConfig": "projects/ecoomerecelib/karma.conf.js"
-          }
-        }
-      }
-    },
     "attendancerecorderapp": {
       "projectType": "application",
       "schematics": {
