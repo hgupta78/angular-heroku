@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
       this.attendanceInquriy = response1;
       this.totalCount = response1.total;
         
-       this.attendanceInquriy.foreach(function(val){
+       this.attendanceInquriy.forEach(function(val){
            val.people = this.dataList.filter(
       a => a.city.toLowerCase() === val.name.toLowerCase()); 
          
