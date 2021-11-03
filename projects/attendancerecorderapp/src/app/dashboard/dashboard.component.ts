@@ -54,7 +54,9 @@ export class DashboardComponent implements OnInit {
       this.processResponse(this);
     })
     })
-    
+    this.getAttendanceInquriyInterval();
+  }
+
     
   //  this.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
     //  this.attendanceInquriy = response;
@@ -62,9 +64,7 @@ export class DashboardComponent implements OnInit {
      // this.processResponseTotalCount(this);
      // this.processResponse(this);
    // })
-    this.getAttendanceInquriyInterval();
-  }
-
+    
   getAttendanceInquriyInterval() {
     var vm = this;
     setInterval(function () {
