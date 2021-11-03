@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
       this.attendanceInquriy = response1;
       this.totalCount = response1.total;
         
-       this.attendanceInquriy.forEach(function(val){
+       this.attendanceInquriy.list.forEach(function(val){
            val.people = this.dataList.filter(
       a => a.city.toLowerCase() === val.name.toLowerCase()); 
          
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
     setInterval(function () {
       vm.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
         vm.attendanceInquriy = response;
-         vm.attendanceInquriy.foreach(function(val){
+         vm.attendanceInquriy.list.forEach(function(val){
            val.people = vm.dataList.filter(
       a => a.city.toLowerCase() === val.name.toLowerCase()); 
          
