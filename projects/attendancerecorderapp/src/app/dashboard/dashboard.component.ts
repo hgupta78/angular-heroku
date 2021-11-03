@@ -39,12 +39,28 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.attendancerecorderService.getProductList().subscribe((response) => {
       this.dataList = response;
-    })
-    this.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
-      this.attendanceInquriy = response;
-      this.totalCount = response.total;
+      
+      this.attendancerecorderService.getAttendanceInquiry().subscribe((response1) => {
+      this.attendanceInquriy = response1;
+      this.totalCount = response1.total;
+        
+       this.attendanceInquriy.foreach(function(val){
+           val.people = this.dataList.filter(
+      a => a.city.toLowerCase() === val.name.toLowerCase()); 
+         
+       }) 
+        
       this.processResponseTotalCount(this);
       this.processResponse(this);
+    })
+    })
+    
+    
+  //  this.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
+    //  this.attendanceInquriy = response;
+     // this.totalCount = response.total;
+     // this.processResponseTotalCount(this);
+     // this.processResponse(this);
     })
     this.getAttendanceInquriyInterval();
   }
@@ -54,12 +70,29 @@ export class DashboardComponent implements OnInit {
     setInterval(function () {
       vm.attendancerecorderService.getAttendanceInquiry().subscribe((response) => {
         vm.attendanceInquriy = response;
+         vm.attendanceInquriy.foreach(function(val){
+           val.people = vm.dataList.filter(
+      a => a.city.toLowerCase() === val.name.toLowerCase()); 
+         
+       }) 
         vm.totalCount = response.total;
+        vm.processResponseTotalCount(vm);
         vm.processResponse(vm);
       })
-    }, 10000);
+    }, 100000);
 
   }
+  
+  getStateWisePresentCount(name: string){
+  let stateDataCount  = 0;
+    let stateData = this.attendanceInquriy.list.filter(
+      state => state.name.toLowerCase() === name.toLowerCase());
+    if(stateData && stateData[0] && stateData[0].count){
+      stateDataCount = stateData[0].count;
+    }
+  return stateDataCount;
+}
+  
 processResponseTotalCount(vm) {
    vm.nationalTotalCount = 0;
   vm.stateTotalCount = 0
