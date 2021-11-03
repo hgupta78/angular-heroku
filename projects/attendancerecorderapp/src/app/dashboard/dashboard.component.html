@@ -128,7 +128,7 @@
                             <h3 class="text-2xl">Total State</h3>
                         </div>
                         <div class="count font-semibold" style="color: #F49420;">
-                            <h1 class="text-4xl">37</h1>
+                            <h1 class="text-4xl">{{attendanceInquriy?.totalList?.length -1}}</h1>
                         </div>
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
@@ -136,7 +136,7 @@
                             <h3 class="text-2xl">Expected</h3>
                         </div>
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">150</h1>
+                          <h1 class="text-4xl">{{stateTotalCount}}</h1>
                       </div>
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
@@ -144,7 +144,7 @@
                             <h3 class="text-2xl">Present</h3>
                         </div>
                       <div class="count font-semibold" style="color: #F49420;">
-                          <h1 class="text-4xl">125</h1>
+                          <h1 class="text-4xl">{{stateTotalPresentCount}}</h1>
                       </div>
                     </div>
                     <div class="mx-4 p-4 pl-4 md:pl-8">
@@ -152,245 +152,26 @@
                             <h3 class="text-2xl">Absent</h3>
                         </div>
                         <div class="count font-semibold" style="color: #F49420;">
-                            <h1 class="text-4xl">25</h1>
+                            <h1 class="text-4xl">{{stateTotalCount-stateTotalPresentCount}}</h1>
                         </div>
                     </div>
                 </div>
 
                 <!-- Accordian Starts - State Wise Stat -->
-                <div *ngFor="let item of dataList"  class="state-wise-stat bg-white border-2 border-grey-500 rounded-b-2xl overflow-hidden">
+                <div class="state-wise-stat bg-white border-2 border-grey-500 rounded-b-2xl overflow-hidden">
                     <ul class="stat-accordian bg-gray-50">
-                        <li class="state">
+                        <li class="state" *ngFor="let state1 of attendanceInquriy?.totalList">
                             <div class="state-stat grid grid-cols-4 divide-x-2 divide-gray-300 py-2 text-2xl">
-                                <div class="state-name mx-4 pl-0 mr-0 pr-0 md:pl-4">{{item.city}}</div>
-                                <div class="state-expected mx-4 pl-4 md:pl-8 flex items-center">05</div>
-                                <div class="state-present mx-4 pl-4 md:pl-8 flex items-center">03</div>
+                                <div class="state-name mx-4 pl-0 mr-0 pr-0 md:pl-4">{{state1.name}}</div>
+                                <div class="state-expected mx-4 pl-4 md:pl-8 flex items-center">{{state1.count}}</div>
+                                <div class="state-present mx-4 pl-4 md:pl-8 flex items-center">{{getStateWisePresentCount(state1.name)}}</div>
                                 <div class="state-absent mx-4 mr-0 px-4 md:px-8 relative flex items-center justify-between">
-                                    02
-                                    <div class="state-detail-expand-trigger cursor-pointer hover:text-yellow-600 transition-all duration-100 transform rotate-0">
-                                        <svg class="h-6 md:h-8 svg-inline--fa fa-chevron-down fa-w-14 fa-7x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
-                                    </div>
+                                    {{state1.count - getStateWisePresentCount(state1.name)}}
                                 </div>
                             </div>
-                            <table class="state-detail hidden bg-white w-full text-base md:text-xl">
-                                <tbody>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-red-500 rounded-full font-semibold text-white max-w-min">Absent</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            
                         </li>
-                        <li class="state">
-                            <div class="state-stat grid grid-cols-4 divide-x-2 divide-gray-300 py-2 text-2xl">
-                                <div class="state-name mx-4 pl-0 mr-0 pr-0 md:pl-4">Maharashtra</div>
-                                <div class="state-expected mx-4 pl-4 md:pl-8 flex items-center">05</div>
-                                <div class="state-present mx-4 pl-4 md:pl-8 flex items-center">03</div>
-                                <div class="state-absent mx-4 mr-0 px-4 md:px-8 relative flex items-center justify-between">
-                                    02
-                                    <div class="state-detail-expand-trigger cursor-pointer hover:text-yellow-600 transition-all duration-100 transform rotate-0">
-                                        <svg class="h-6 md:h-8 svg-inline--fa fa-chevron-down fa-w-14 fa-7x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="state-detail hidden bg-white w-full text-base md:text-xl">
-                                <tbody>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-red-500 rounded-full font-semibold text-white max-w-min">Absent</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </li>
-                        <li class="state">
-                            <div class="state-stat grid grid-cols-4 divide-x-2 divide-gray-300 py-2 text-2xl">
-                                <div class="state-name mx-4 pl-0 mr-0 pr-0 md:pl-4">Arunachal Pradesh</div>
-                                <div class="state-expected mx-4 pl-4 md:pl-8 flex items-center">05</div>
-                                <div class="state-present mx-4 pl-4 md:pl-8 flex items-center">03</div>
-                                <div class="state-absent mx-4 mr-0 px-4 md:px-8 relative flex items-center justify-between">
-                                    02
-                                    <div class="state-detail-expand-trigger cursor-pointer hover:text-yellow-600 transition-all duration-100 transform rotate-0">
-                                        <svg class="h-6 md:h-8 svg-inline--fa fa-chevron-down fa-w-14 fa-7x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="state-detail hidden bg-white w-full text-base md:text-xl">
-                                <tbody>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-red-500 rounded-full font-semibold text-white max-w-min">Absent</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-1 border-gray-300 w-full">
-                                        <td class="profile-photo border-t-2 border-b-2 border-gray-100 py-2 w-2/12">
-                                            <div class="w-full flex justify-center">
-                                                <div class="id-profile-image relative h-14 w-14 flex flex-row items-center rounded-full overflow-hidden shadow-md">
-                                                    <img src="./assets/img/sample.jpeg" alt="Profile Photo" class="h-full w-full object-cover">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="name border-t-2 border-b-2 border-gray-100 py-2 w-3/12 font-semibold">
-                                            Shri. Nitin Gadkari
-                                        </td>
-                                        <td class="designation border-t-2 border-b-2 border-gray-100 py-2 w-5/12">
-                                            Minister of Road Transport and Highways
-                                        </td>
-                                        <td class="attendance-status border-t-2 border-b-2 border-gray-100 py-2 w-2/12 h-full text-center">
-                                            <div class="w-full flex justify-center">
-                                                <div class="badge px-3 md:px-10 py-1 bg-green-500 rounded-full font-semibold text-white max-w-min">Present</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </li>
+                      
                     </ul>
                 </div>
                 <!-- Accordian Ends - State Wise Stat -->
@@ -436,4 +217,3 @@
         }
 
     </script>
-
