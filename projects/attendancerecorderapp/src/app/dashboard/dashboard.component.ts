@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
      // this.totalCount = response.total;
      // this.processResponseTotalCount(this);
      // this.processResponse(this);
-    })
+   // })
     this.getAttendanceInquriyInterval();
   }
 
